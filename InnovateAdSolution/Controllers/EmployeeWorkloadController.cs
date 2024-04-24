@@ -34,17 +34,17 @@ namespace InnovateAd.Controllers
             var newEmployeeWorkload = await _employeeWorkloadService.CreateEmployeeWorkload(employeeId, projectId, hours_worked, date);
             return CreatedAtAction(nameof(GetEmployeeWorkload), new { newEmployeeWorkload.id }, newEmployeeWorkload);
         }
-        /*[HttpPut("{id}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<EmployeeWorkload>> UpdateEmployeeWorkload(int id, [FromBody] EmployeeWorkload employeeWorkload)
         {
             try
             {
-                return Ok(await _employeeWorkloadService.UpdateEmployeeWorkload(id, employeeWorkload));
+                return Ok(await _employeeWorkloadService.UpdateEmployeeWorkload(id, employeeWorkload.EmployeeId,employeeWorkload.ProjectId,employeeWorkload.hours_worked,employeeWorkload.date));
             }
             catch (Exception e)
             {
                 return NotFound(e.Message);
             }
-        }*/
+        }
     }
 }
