@@ -23,7 +23,5 @@ namespace InnovateAd.Entities
         [Required]
         public string employee_number { get; set; }
         public bool is_active { get; set; }
-        public List<Task> tasks { get; set; }
-        public List<EmployeeWorkload> employeeWorkloads { get; set; }
     }
 }

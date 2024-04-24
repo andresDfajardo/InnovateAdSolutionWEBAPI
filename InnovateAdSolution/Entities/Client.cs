@@ -19,11 +19,9 @@ namespace InnovateAd.Entities
         public string document { get; set; }
         [StringLength(50)]
         public string email { get; set; }
-        [StringLength(50)]
         [Required]
         public bool is_active { get; set; }
         public string client_number { get; set; }
-        public List<Project> projects { get; set; }
 
     }
 }

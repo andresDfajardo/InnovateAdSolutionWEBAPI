@@ -34,5 +34,17 @@ namespace InnovateAd.Controllers
             var newEmployee = await _employeeService.CreateEmployee(name, position, department, hire_date, email, employee_number);
             return CreatedAtAction(nameof(GetEmployee), new { newEmployee.id }, newEmployee);
         }
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Employee>> UpdateEmployee(int id, [FromBody] Employee employee)
+        {
+            try
+            {
+                return Ok(await _employeeService.UpdateEmployee(id, employee.name,employee.position,employee.department,employee.hire_date,employee.email, employee.employee_number));
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
     }
 }

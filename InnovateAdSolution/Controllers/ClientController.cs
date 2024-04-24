@@ -35,5 +35,17 @@ namespace InnovateAd.Controllers
             var newClient = await _clientService.CreateClient(name, lastName, docType, document, email, clientNumber);
             return CreatedAtAction(nameof(GetClient), new { newClient.id }, newClient);
         }
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Client>> UpdateClient(int id, [FromBody] Client client)
+        {
+            try
+            {
+                return Ok(await _clientService.UpdateClient(id, client.name, client.last_name, client.doc_type, client.document, client.email, client.client_number));
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
     }
 }
