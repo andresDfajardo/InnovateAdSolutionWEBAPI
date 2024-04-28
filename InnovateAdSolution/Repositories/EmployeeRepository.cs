@@ -7,7 +7,7 @@ namespace InnovateAd.Repositories
 {
     public interface IEmployeeRepository
     {
-        Task<Employee> CreateEmployee(string name, string position, string department, DateOnly hire_date, string email, string employee_number);
+        Task<Employee> CreateEmployee(string name, string position, string department, string hire_date, string email, string employee_number);
         Task<List<Employee>> GetAll();
         Task<Employee> UpdateEmployee(Employee employee);
         Task<Employee> GetEmployee(int id);
@@ -20,7 +20,7 @@ namespace InnovateAd.Repositories
         {
             _db = db;
         }
-        public async Task<Employee> CreateEmployee(string name, string position, string department, DateOnly hire_date, string email, string employee_number)
+        public async Task<Employee> CreateEmployee(string name, string position, string department, string hire_date, string email, string employee_number)
         {
             Employee newEmployee = new Employee
             {

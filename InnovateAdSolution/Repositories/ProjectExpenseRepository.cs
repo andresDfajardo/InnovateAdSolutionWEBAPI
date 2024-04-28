@@ -7,7 +7,7 @@ namespace InnovateAd.Repositories
 {
     public interface IProjectExpenseRepository
     {
-        Task<ProjectExpense> CreateProjectExpense(int projectId, string expense_type, int expense_amount, DateOnly expense_date);
+        Task<ProjectExpense> CreateProjectExpense(int projectId, string expense_type, int expense_amount, string expense_date);
         Task<List<ProjectExpense>> GetAll();
         Task<ProjectExpense> UpdateProjectExpense(ProjectExpense projectExpense);
         Task<ProjectExpense> GetProjectExpense(int id);
@@ -20,7 +20,7 @@ namespace InnovateAd.Repositories
         {
             _db = db;
         }
-        public async Task<ProjectExpense> CreateProjectExpense(int projectId, string expense_type, int expense_amount, DateOnly expense_date)
+        public async Task<ProjectExpense> CreateProjectExpense(int projectId, string expense_type, int expense_amount, string expense_date)
         {
             ProjectExpense newProjectExpense = new ProjectExpense
             {

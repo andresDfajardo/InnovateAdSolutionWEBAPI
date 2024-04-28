@@ -15,6 +15,6 @@ namespace InnovateAd.Entities
         public int hours_worked { get; set; }
         public bool is_active { get; set; }
         [Required]
-        public DateOnly date { get; set; }
+        public string date { get; set; }
     }
 }

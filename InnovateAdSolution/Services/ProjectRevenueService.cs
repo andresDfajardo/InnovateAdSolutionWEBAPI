@@ -5,9 +5,9 @@ namespace InnovateAd.Services
 {
     public interface IProjectRevenueService
     {
-        Task<ProjectRevenue> CreateProjectRevenue(int projectId, int revenue_amount, DateOnly date_received);
+        Task<ProjectRevenue> CreateProjectRevenue(int projectId, int revenue_amount, string date_received);
         Task<List<ProjectRevenue>> GetAll();
-        Task<ProjectRevenue> UpdateProjectRevenue(int id, int? projectId, int? revenue_amount, DateOnly? date_received);
+        Task<ProjectRevenue> UpdateProjectRevenue(int id, int? projectId= null, int? revenue_amount = null, string? date_received = null);
         Task<ProjectRevenue> GetProjectRevenue(int id);
         Task<ProjectRevenue> DeleteProjectRevenue(int id);
     }
@@ -18,7 +18,7 @@ namespace InnovateAd.Services
         {
             _projectRevenueRepository = projectRevenueRepository;
         }
-        public async Task<ProjectRevenue> CreateProjectRevenue(int projectId, int revenue_amount, DateOnly date_received)
+        public async Task<ProjectRevenue> CreateProjectRevenue(int projectId, int revenue_amount, string date_received)
         {
             return await _projectRevenueRepository.CreateProjectRevenue(projectId, revenue_amount, date_received);
         }
@@ -48,7 +48,7 @@ namespace InnovateAd.Services
             return await _projectRevenueRepository.GetProjectRevenue(id);
         }
 
-        public async Task<ProjectRevenue> UpdateProjectRevenue(int id, int? projectId, int? revenue_amount, DateOnly? date_received)
+        public async Task<ProjectRevenue> UpdateProjectRevenue(int id, int? projectId, int? revenue_amount, string? date_received)
         {
             ProjectRevenue newprojectrevenue = await _projectRevenueRepository.GetProjectRevenue(id);
 
@@ -64,7 +64,7 @@ namespace InnovateAd.Services
                 }
                 else if (date_received != null)
                 {
-                    newprojectrevenue.date_received = (DateOnly)date_received;
+                    newprojectrevenue.date_received = date_received;
                 }
                 return await _projectRevenueRepository.UpdateProjectRevenue(newprojectrevenue);
 

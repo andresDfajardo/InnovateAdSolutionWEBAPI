@@ -15,8 +15,8 @@ namespace InnovateAd.Entities
         [Required]
         public string description { get; set; }
         [Required]
-        public DateOnly start_date { get; set; }
-        public DateOnly end_date { get; set; }
+        public string start_date { get; set; }
+        public string end_date { get; set; }
         [StringLength(50)]
         [Required]
         public string status { get; set; }

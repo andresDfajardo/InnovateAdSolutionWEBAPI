@@ -6,7 +6,7 @@ namespace InnovateAd.Repositories
 {
     public interface IProjectRevenueRepository
     {
-        Task<ProjectRevenue> CreateProjectRevenue(int projectId, int revenue_amount, DateOnly date_received);
+        Task<ProjectRevenue> CreateProjectRevenue(int projectId, int revenue_amount, string date_received);
         Task<List<ProjectRevenue>> GetAll();
         Task<ProjectRevenue> UpdateProjectRevenue(ProjectRevenue projectRevenue);
         Task<ProjectRevenue> GetProjectRevenue(int id);
@@ -20,7 +20,7 @@ namespace InnovateAd.Repositories
         {
             _db = db;
         }
-        public async Task<ProjectRevenue> CreateProjectRevenue(int projectId, int revenue_amount, DateOnly date_received)
+        public async Task<ProjectRevenue> CreateProjectRevenue(int projectId, int revenue_amount, string date_received)
         {
             ProjectRevenue newProjectRevenue = new ProjectRevenue
             {

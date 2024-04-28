@@ -29,17 +29,17 @@ namespace InnovateAd.Controllers
             return Ok(EmployeeWorkload);
         }
         [HttpPost("{employeeId}/{projectId}/{hours_worked}/{date}")]
-        public async Task<ActionResult<EmployeeWorkload>> CreateEmployeeWorkload(int employeeId, int projectId, int hours_worked, DateOnly date)
+        public async Task<ActionResult<EmployeeWorkload>> CreateEmployeeWorkload(int employeeId, int projectId, int hours_worked, string date)
         {
             var newEmployeeWorkload = await _employeeWorkloadService.CreateEmployeeWorkload(employeeId, projectId, hours_worked, date);
             return CreatedAtAction(nameof(GetEmployeeWorkload), new { newEmployeeWorkload.id }, newEmployeeWorkload);
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult<EmployeeWorkload>> UpdateEmployeeWorkload(int id, [FromBody] EmployeeWorkload employeeWorkload)
+        public async Task<ActionResult<EmployeeWorkload>> UpdateEmployeeWorkload(int id, int? employeeId = null, int? projectId = null, int? hours_worked = null, string? date = null)
         {
             try
             {
-                return Ok(await _employeeWorkloadService.UpdateEmployeeWorkload(id, employeeWorkload.EmployeeId,employeeWorkload.ProjectId,employeeWorkload.hours_worked,employeeWorkload.date));
+                return Ok(await _employeeWorkloadService.UpdateEmployeeWorkload(id, employeeId, projectId, hours_worked, date));
             }
             catch (Exception e)
             {

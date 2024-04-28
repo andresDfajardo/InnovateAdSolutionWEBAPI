@@ -6,7 +6,7 @@ namespace InnovateAd.Repositories
 {
     public interface IEmployeeWorkloadRepository
     {
-        Task<EmployeeWorkload> CreateEmployeeWorkload(int employeeId, int projectId, int hours_worked, DateOnly date);
+        Task<EmployeeWorkload> CreateEmployeeWorkload(int employeeId, int projectId, int hours_worked, string date);
         Task<List<EmployeeWorkload>> GetAll();
         Task<EmployeeWorkload> UpdateEmployeeWorkload(EmployeeWorkload employeeWorkload);
         Task<EmployeeWorkload> GetEmployeeWorkload(int id);
@@ -20,7 +20,7 @@ namespace InnovateAd.Repositories
         {
             _db = db;
         }
-        public async Task<EmployeeWorkload> CreateEmployeeWorkload(int employeeId, int projectId, int hours_worked, DateOnly date)
+        public async Task<EmployeeWorkload> CreateEmployeeWorkload(int employeeId, int projectId, int hours_worked, string date)
         {
             EmployeeWorkload newEmployeeWorkload = new EmployeeWorkload
             {

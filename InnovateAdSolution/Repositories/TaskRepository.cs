@@ -7,7 +7,7 @@ namespace InnovateAd.Repositories
 {
     public interface ITaskRepository
     {
-        Task<Entities.Task> CreateTask(int projectId, int employeeId, string description, DateOnly start_date, DateOnly end_date, string status);
+        Task<Entities.Task> CreateTask(int projectId, int employeeId, string description, string start_date, string end_date, string status);
         Task<List<Entities.Task>> GetAll();
         Task<Entities.Task> UpdateTask(Entities.Task task);
         Task<Entities.Task> GetTask(int id);
@@ -20,7 +20,7 @@ namespace InnovateAd.Repositories
         {
             _db = db;
         }
-        public async Task<Entities.Task> CreateTask(int projectId, int employeeId, string description, DateOnly start_date, DateOnly end_date, string status)
+        public async Task<Entities.Task> CreateTask(int projectId, int employeeId, string description, string start_date, string end_date, string status)
         {
             Entities.Task newTask = new Entities.Task
             {

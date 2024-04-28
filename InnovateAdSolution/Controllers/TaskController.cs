@@ -1,4 +1,5 @@
-﻿using InnovateAd.Services;
+﻿using InnovateAd.Entities;
+using InnovateAd.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InnovateAd.Controllers
@@ -28,10 +29,22 @@ namespace InnovateAd.Controllers
             return Ok(task);
         }
         [HttpPost("{projectId}/{employeeId}/{description}/{start_date}/{end_date}/{status}")]
-        public async Task<ActionResult<Entities.Task>> CreateTask(int projectId, int employeeId, string description, DateOnly start_date, DateOnly end_date, string status)
+        public async Task<ActionResult<Entities.Task>> CreateTask(int projectId, int employeeId, string description, string start_date, string end_date, string status)
         {
             var newTask = await _taskService.CreateTask(projectId, employeeId, description, start_date, end_date, status);
             return CreatedAtAction(nameof(GetTask), new { newTask.id }, newTask);
+        }
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Entities.Task>> UpdateTask(int id, int? projectId = null, int? employeeId = null, string? description = null, string? start_date = null, string? end_date = null, string? status = null)
+        {
+            try
+            {
+                return Ok(await _taskService.UpdateTask(id, projectId, employeeId, description, start_date, end_date, status));
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
     }
 }

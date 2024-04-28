@@ -14,8 +14,9 @@ namespace InnovateAd.Entities
         [StringLength(50)]
         [Required]
         public string department { get; set; }
+        [StringLength (20)]
         [Required]
-        public DateOnly hire_date { get; set; }
+        public string hire_date { get; set; }
         [StringLength(50)]
         [Required]
         public string email { get; set; }

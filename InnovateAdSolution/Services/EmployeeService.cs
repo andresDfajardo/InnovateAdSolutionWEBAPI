@@ -8,9 +8,9 @@ namespace InnovateAd.Services
 {
     public interface IEmployeeService
     {
-        Task<Employee> CreateEmployee(string name, string position, string department, DateOnly hire_date, string email, string employee_number);
+        Task<Employee> CreateEmployee(string name, string position, string department, string hire_date, string email, string employee_number);
         Task<List<Employee>> GetAll();
-        Task<Employee> UpdateEmployee(int id, string? name, string? position, string? department, DateOnly? hire_date, string? email, string? employee_number);
+        Task<Employee> UpdateEmployee(int id, string? name=null, string? position=null, string? department = null, string? hire_date=null, string? email = null, string? employee_number = null);
         Task<Employee> GetEmployee(int id);
         Task<Employee> DeleteEmployee(int id);
     }
@@ -21,7 +21,7 @@ namespace InnovateAd.Services
         {
             _employeeRepository = employeeRepository;
         }
-        public async Task<Employee> CreateEmployee(string name, string position, string department, DateOnly hire_date, string email, string employee_number)
+        public async Task<Employee> CreateEmployee(string name, string position, string department, string hire_date, string email, string employee_number)
         {
             return await _employeeRepository.CreateEmployee(name, position, department, hire_date, email, employee_number);
         }
@@ -50,7 +50,7 @@ namespace InnovateAd.Services
             return await _employeeRepository.GetEmployee(id);
         }
 
-        public async Task<Employee> UpdateEmployee(int id, string name, string position, string department, DateOnly? hire_date, string email, string employee_number)
+        public async Task<Employee> UpdateEmployee(int id, string name, string position, string department, string? hire_date, string email, string employee_number)
         {
             Employee newemployee = await _employeeRepository.GetEmployee(id);
 
@@ -70,7 +70,7 @@ namespace InnovateAd.Services
                 }
                 else if (hire_date != null)
                 {
-                    newemployee.hire_date = (DateOnly)hire_date;
+                    newemployee.hire_date = hire_date;
                 }
                 else if (email != null)
                 {

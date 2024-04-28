@@ -5,9 +5,9 @@ namespace InnovateAd.Services
 {
     public interface IEmployeeWorkloadService
     {
-        Task<EmployeeWorkload> CreateEmployeeWorkload(int employeeId, int projectId, int hours_worked, DateOnly date);
+        Task<EmployeeWorkload> CreateEmployeeWorkload(int employeeId, int projectId, int hours_worked, string date);
         Task<List<EmployeeWorkload>> GetAll();
-        Task<EmployeeWorkload> UpdateEmployeeWorkload(int id, int? employeeId, int? projectId, int? hours_worked, DateOnly? date);
+        Task<EmployeeWorkload> UpdateEmployeeWorkload(int id, int? employeeId=null, int? projectId = null, int? hours_worked = null, string? date=null);
         Task<EmployeeWorkload> GetEmployeeWorkload(int id);
         Task<EmployeeWorkload> DeleteEmployeeWorkload(int id);
     }
@@ -18,7 +18,7 @@ namespace InnovateAd.Services
         {
             _employeeWorkloadRepository = employeeWorkloadRepository;
         }
-        public async Task<EmployeeWorkload> CreateEmployeeWorkload(int employeeId, int projectId, int hours_worked, DateOnly date)
+        public async Task<EmployeeWorkload> CreateEmployeeWorkload(int employeeId, int projectId, int hours_worked, string date)
         {
             return await _employeeWorkloadRepository.CreateEmployeeWorkload(employeeId, projectId, hours_worked, date);
         }
@@ -48,7 +48,7 @@ namespace InnovateAd.Services
             return await _employeeWorkloadRepository.GetEmployeeWorkload(id);
         }
 
-        public async Task<EmployeeWorkload> UpdateEmployeeWorkload(int id, int? employeeId, int? projectId, int? hours_worked, DateOnly? date)
+        public async Task<EmployeeWorkload> UpdateEmployeeWorkload(int id, int? employeeId, int? projectId, int? hours_worked, string? date)
         {
             EmployeeWorkload newemployeeworkload = await _employeeWorkloadRepository.GetEmployeeWorkload(id);
 
@@ -68,7 +68,7 @@ namespace InnovateAd.Services
                 }
                 else if (date != null)
                 {
-                    newemployeeworkload.date = (DateOnly)date;
+                    newemployeeworkload.date = date;
                 }
                 return await _employeeWorkloadRepository.UpdateEmployeeWorkload(newemployeeworkload);
 

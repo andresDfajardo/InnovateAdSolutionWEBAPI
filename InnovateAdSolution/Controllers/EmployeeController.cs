@@ -29,17 +29,17 @@ namespace InnovateAd.Controllers
             return Ok(Employee);
         }
         [HttpPost("{name}/{position}/{department}/{hire_date}/{email}/{employee_number}")]
-        public async Task<ActionResult<Employee>> CreateEmployee(string name, string position, string department, DateOnly hire_date, string email, string employee_number)
+        public async Task<ActionResult<Employee>> CreateEmployee(string name, string position, string department, string hire_date, string email, string employee_number)
         {
             var newEmployee = await _employeeService.CreateEmployee(name, position, department, hire_date, email, employee_number);
             return CreatedAtAction(nameof(GetEmployee), new { newEmployee.id }, newEmployee);
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult<Employee>> UpdateEmployee(int id, [FromBody] Employee employee)
+        public async Task<ActionResult<Employee>> UpdateEmployee(int id, string? name = null, string? position = null, string? department = null, string? hire_date = null, string? email = null, string? employee_number = null)
         {
             try
             {
-                return Ok(await _employeeService.UpdateEmployee(id, employee.name,employee.position,employee.department,employee.hire_date,employee.email, employee.employee_number));
+                return Ok(await _employeeService.UpdateEmployee(id, name, position, department, hire_date, email, employee_number));
             }
             catch (Exception e)
             {

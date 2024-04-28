@@ -5,9 +5,9 @@ namespace InnovateAd.Services
 {
     public interface IProjectService
     {
-        Task<Project> CreateProject(string project_name, int clientId, DateOnly start_date, DateOnly end_date, int budget, string status);
+        Task<Project> CreateProject(string project_name, int clientId, string start_date, string end_date, int budget, string status);
         Task<List<Project>> GetAll();
-        Task<Project> UpdateProject(int id, string? project_name, int? clientId, DateOnly? start_date, DateOnly? end_date, int? budget, string? status);
+        Task<Project> UpdateProject(int id, string? project_name=null, int? clientId=null, string? start_date=null, string? end_date=null, int? budget=null, string? status = null);
         Task<Project> GetProject(int id);
         Task<Project> DeleteProject(int id);
     }
@@ -18,7 +18,7 @@ namespace InnovateAd.Services
         {
             _projectRepository = projectRepository;
         }
-        public async Task<Project> CreateProject(string project_name, int clientId, DateOnly start_date, DateOnly end_date, int budget, string status)
+        public async Task<Project> CreateProject(string project_name, int clientId, string start_date, string end_date, int budget, string status)
         {
             return await _projectRepository.CreateProject(project_name, clientId, start_date, end_date, budget, status);
         }
@@ -48,7 +48,7 @@ namespace InnovateAd.Services
             return await _projectRepository.GetProject(id);
         }
 
-        public async Task<Project> UpdateProject(int id, string project_name, int? clientId, DateOnly? start_date, DateOnly? end_date, int? budget, string status)
+        public async Task<Project> UpdateProject(int id, string project_name, int? clientId, string? start_date, string? end_date, int? budget, string status)
         {
             Project newproject = await _projectRepository.GetProject(id);
 
@@ -64,11 +64,11 @@ namespace InnovateAd.Services
                 }
                 else if (start_date != null)
                 {
-                    newproject.start_date = (DateOnly)start_date;
+                    newproject.start_date = start_date;
                 }
                 else if (end_date != null)
                 {
-                    newproject.end_date = (DateOnly)end_date;
+                    newproject.end_date = end_date;
                 }
                 else if (budget != null)
                 {

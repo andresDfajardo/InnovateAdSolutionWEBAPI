@@ -5,9 +5,9 @@ namespace InnovateAd.Services
 {
     public interface IProjectExpenseService
     {
-        Task<ProjectExpense> CreateProjectExpense(int projectId, string expense_type, int expense_amount, DateOnly expense_date);
+        Task<ProjectExpense> CreateProjectExpense(int projectId, string expense_type, int expense_amount, string expense_date);
         Task<List<ProjectExpense>> GetAll();
-        Task<ProjectExpense> UpdateProjectExpense(int id, int? projectId, string? expense_type, int? expense_amount, DateOnly? expense_date);
+        Task<ProjectExpense> UpdateProjectExpense(int id, int? projectId=null, string? expense_type=null, int? expense_amount = null, string? expense_date=null);
         Task<ProjectExpense> GetProjectExpense(int id);
         Task<ProjectExpense> DeleteProjectExpense(int id);
     }
@@ -18,7 +18,7 @@ namespace InnovateAd.Services
         {
             _projectExpenseRepository = projectExpenseRepository;
         }
-        public async Task<ProjectExpense> CreateProjectExpense(int projectId, string expense_type, int expense_amount, DateOnly expense_date)
+        public async Task<ProjectExpense> CreateProjectExpense(int projectId, string expense_type, int expense_amount, string expense_date)
         {
             return await _projectExpenseRepository.CreateProjectExpense(projectId, expense_type, expense_amount, expense_date);
         }
@@ -48,7 +48,7 @@ namespace InnovateAd.Services
             return await _projectExpenseRepository.GetProjectExpense(id);
         }
 
-        public async Task<ProjectExpense> UpdateProjectExpense(int id, int? projectId, string expense_type, int? expense_amount, DateOnly? expense_date)
+        public async Task<ProjectExpense> UpdateProjectExpense(int id, int? projectId, string expense_type, int? expense_amount, string? expense_date)
         {
             ProjectExpense newprojectexpense = await _projectExpenseRepository.GetProjectExpense(id);
 
@@ -68,7 +68,7 @@ namespace InnovateAd.Services
                 }
                 else if (expense_date != null)
                 {
-                    newprojectexpense.expense_date = (DateOnly)expense_date;
+                    newprojectexpense.expense_date = expense_date;
                 }
                 return await _projectExpenseRepository.UpdateProjectExpense(newprojectexpense);
             }

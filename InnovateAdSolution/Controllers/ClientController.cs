@@ -36,11 +36,11 @@ namespace InnovateAd.Controllers
             return CreatedAtAction(nameof(GetClient), new { newClient.id }, newClient);
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult<Client>> UpdateClient(int id, [FromBody] Client client)
+        public async Task<ActionResult<Client>> UpdateClient(int id, string? name = null, string? lastName = null, string? docType = null, string? document = null, string? email = null, string? clientNumber = null)
         {
             try
             {
-                return Ok(await _clientService.UpdateClient(id, client.name, client.last_name, client.doc_type, client.document, client.email, client.client_number));
+                return Ok(await _clientService.UpdateClient(id, name, lastName, docType, document, email, clientNumber));
             }
             catch (Exception e)
             {

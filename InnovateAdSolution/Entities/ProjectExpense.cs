@@ -14,7 +14,7 @@ namespace InnovateAd.Entities
         [Required]
         public int expense_amount { get; set; }
         [Required]
-        public DateOnly expense_date { get; set; }
+        public string expense_date { get; set; }
         public bool is_active { get; set; }
 
 

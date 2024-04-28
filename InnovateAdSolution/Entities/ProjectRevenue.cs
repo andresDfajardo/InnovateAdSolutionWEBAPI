@@ -11,7 +11,7 @@ namespace InnovateAd.Entities
         [Required]
         public int revenue_amount { get; set; }
         [Required]
-        public DateOnly date_received { get; set; }
+        public string date_received { get; set; }
 
         public bool is_active { get; set; }
 

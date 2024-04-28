@@ -6,9 +6,9 @@ namespace InnovateAd.Services
 {
     public interface ITaskService
     {
-        Task<Entities.Task> CreateTask(int projectId, int employeeId, string description, DateOnly start_date, DateOnly end_date, string status);
+        Task<Entities.Task> CreateTask(int projectId, int employeeId, string description, string start_date, string end_date, string status);
         Task<List<Entities.Task>> GetAll();
-        Task<Entities.Task> UpdateTask(int id, int? projectId, int? employeeId, string? description, DateOnly? start_date, DateOnly? end_date, string? status);
+        Task<Entities.Task> UpdateTask(int id, int? projectId=null, int? employeeId = null, string? description=null, string? start_date=null, string? end_date = null, string? status=null);
         Task<Entities.Task> GetTask(int id);
         Task<Entities.Task> DeleteTask(int id);
     }
@@ -19,7 +19,7 @@ namespace InnovateAd.Services
         {
             _taskRepository = taskRepository;
         }
-        public async Task<Entities.Task> CreateTask(int projectId, int employeeId, string description, DateOnly start_date, DateOnly end_date, string status)
+        public async Task<Entities.Task> CreateTask(int projectId, int employeeId, string description, string start_date, string end_date, string status)
         {
             return await _taskRepository.CreateTask(projectId, employeeId, description, start_date, end_date, status);
         }
@@ -49,7 +49,7 @@ namespace InnovateAd.Services
             return await _taskRepository.GetTask(id);
         }
 
-        public async Task<Entities.Task> UpdateTask(int id, int? projectId, int? employeeId, string description, DateOnly? start_date, DateOnly? end_date, string status)
+        public async Task<Entities.Task> UpdateTask(int id, int? projectId, int? employeeId, string description, string? start_date, string? end_date, string status)
         {
             Entities.Task newtask = await _taskRepository.GetTask(id);
 
@@ -69,11 +69,11 @@ namespace InnovateAd.Services
                 }
                 else if (start_date != null)
                 {
-                    newtask.start_date = (DateOnly)start_date;
+                    newtask.start_date = start_date;
                 }
                 else if (end_date != null)
                 {
-                    newtask.end_date = (DateOnly)end_date;
+                    newtask.end_date = end_date;
                 }
                 else if (status != null)
                 {

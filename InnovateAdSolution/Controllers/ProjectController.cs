@@ -29,10 +29,22 @@ namespace InnovateAd.Controllers
             return Ok(Project);
         }
         [HttpPost("{project_name}/{clientId}/{start_date}/{end_date}/{budget}/{status}")]
-        public async Task<ActionResult<Project>> CreateProject(string project_name, int clientId, DateOnly start_date, DateOnly end_date, int budget, string status)
+        public async Task<ActionResult<Project>> CreateProject(string project_name, int clientId, string start_date, string end_date, int budget, string status)
         {
             var newProject = await _projectService.CreateProject(project_name, clientId, start_date, end_date, budget, status);
             return CreatedAtAction(nameof(GetProject), new { newProject.id }, newProject);
+        }
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Project>> UpdateProject(int id, string? project_name = null, int? clientId = null, string? start_date = null, string? end_date = null, int? budget = null, string? status = null)
+        {
+            try
+            {
+                return Ok(await _projectService.UpdateProject(id, project_name, clientId, start_date, end_date, budget, status));
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
     }
 }
