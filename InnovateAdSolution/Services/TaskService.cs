@@ -35,7 +35,7 @@ namespace InnovateAd.Services
             }
             else
             {
-                return null;
+                throw new Exception("Task not found");
             }
         }
 

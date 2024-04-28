@@ -37,6 +37,7 @@ namespace InnovateAd.Repositories
 
         public async Task<EmployeeWorkload> DeleteEmployeeWorkload(EmployeeWorkload employeeWorkload)
         {
+            employeeWorkload.is_active = false;
             _db.EmployeeWorkloads.Update(employeeWorkload);
             await _db.SaveChangesAsync();
             return employeeWorkload;

@@ -37,7 +37,7 @@ namespace InnovateAd.Services
             }
             else
             {
-                return null;
+                throw new Exception("Employee not found");
             }
         }
         public async Task<List<Employee>> GetAll()

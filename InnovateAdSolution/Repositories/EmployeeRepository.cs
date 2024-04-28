@@ -39,6 +39,7 @@ namespace InnovateAd.Repositories
 
         public async Task<Employee> DeleteEmployee(Employee employee)
         {
+            employee.is_active = false;
             _db.Employees.Update(employee);
             await _db.SaveChangesAsync();
             return employee;

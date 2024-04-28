@@ -46,5 +46,15 @@ namespace InnovateAd.Controllers
                 return NotFound(e.Message);
             }
         }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Employee>> DeleteEmployee(int id)
+        {
+            var employee = await _employeeService.DeleteEmployee(id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            return Ok(employee);
+        }
     }
 }

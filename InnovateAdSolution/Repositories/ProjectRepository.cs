@@ -38,7 +38,8 @@ namespace InnovateAd.Repositories
         }
 
         public async Task<Project> DeleteProject(Project project)
-        {
+        {   
+            project.is_active = false;
             _db.Projects.Update(project);
             await _db.SaveChangesAsync();
             return project;

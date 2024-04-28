@@ -34,7 +34,7 @@ namespace InnovateAd.Services
             }
             else
             {
-                return null;
+                throw new Exception("Employee Workload not found");
             }
         }
 

@@ -46,5 +46,15 @@ namespace InnovateAd.Controllers
                 return NotFound(e.Message);
             }
         }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Entities.Task>> DeleteTask(int id)
+        {
+            var task = await _taskService.DeleteTask(id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+            return Ok(task);
+        }
     }
 }

@@ -46,5 +46,15 @@ namespace InnovateAd.Controllers
                 return NotFound(e.Message);
             }
         }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ProjectExpense>> DeleteProjectExpense(int id)
+        {
+            var projectExpense = await _projectExpenseService.DeleteProjectExpense(id);
+            if (projectExpense == null)
+            {
+                return NotFound();
+            }
+            return Ok(projectExpense);
+        }
     }
 }

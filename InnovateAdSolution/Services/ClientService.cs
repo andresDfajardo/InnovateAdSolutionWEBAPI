@@ -37,7 +37,7 @@ namespace InnovateAd.Services
             }
             else
             {
-                return null;
+                throw new Exception("Client not found");
             }
         }
 

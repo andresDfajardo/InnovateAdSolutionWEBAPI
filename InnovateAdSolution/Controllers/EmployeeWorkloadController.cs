@@ -46,5 +46,15 @@ namespace InnovateAd.Controllers
                 return NotFound(e.Message);
             }
         }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<EmployeeWorkload>> DeleteEmployeeWorkload(int id)
+        {
+            var employeeWorkload = await _employeeWorkloadService.DeleteEmployeeWorkload(id);
+            if (employeeWorkload == null)
+            {
+                return NotFound();
+            }
+            return Ok(employeeWorkload);
+        }
     }
 }

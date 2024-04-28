@@ -54,6 +54,7 @@ namespace InnovateAd.Repositories
 
         public async Task<Client> DeleteClient(Client client)
         {
+            client.is_active = false;
             _db.Clients.Update(client);
             await _db.SaveChangesAsync();
             return client;

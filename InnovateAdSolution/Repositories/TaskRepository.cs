@@ -39,6 +39,7 @@ namespace InnovateAd.Repositories
 
         public async Task<Entities.Task> DeleteTask(Entities.Task task)
         {
+            task.is_active = false;
             _db.Tasks.Update(task);
             await _db.SaveChangesAsync();
             return task;

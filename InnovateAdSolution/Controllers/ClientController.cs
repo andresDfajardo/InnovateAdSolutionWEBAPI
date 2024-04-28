@@ -47,5 +47,15 @@ namespace InnovateAd.Controllers
                 return NotFound(e.Message);
             }
         }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Client>> DeleteClient(int id)
+        {
+            var client = await _clientService.DeleteClient(id);
+            if (client == null)
+            {
+                return NotFound();
+            }
+            return Ok(client);
+        }
     }
 }
